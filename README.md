@@ -3,7 +3,7 @@
 **BookNook** is a modern, responsive, and community-driven digital library platform built with **Next.js (App Router)**, **Tailwind CSS**, and **MongoDB with Express.js**. Users can explore our catalog, borrow available books for 14 days, return books, and contribute new titles to the community bookshelf.
 
 ### 🌐 Live Deployment
-- **Live Website URL**: [https://booknook-online-library.vercel.app](https://booknook-online-library.vercel.app)
+- **Live Website URL**: [https://booknook-client-azure.vercel.app](https://booknook-client-azure.vercel.app)
 - **Server API URL**: [https://booknook-server-api.onrender.com](https://booknook-server-api.onrender.com)
 - **Client Repository**: [https://github.com/irfan0072/booknook-client](https://github.com/irfan0072/booknook-client)
 - **Server Repository**: [https://github.com/irfan0072/booknook-server](https://github.com/irfan0072/booknook-server)
