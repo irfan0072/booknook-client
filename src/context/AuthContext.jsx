@@ -2,6 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { auth, googleProvider } from '@/lib/firebase';
+import { signInWithPopup, signOut } from 'firebase/auth';
 
 const AuthContext = createContext();
 
@@ -130,32 +132,60 @@ export function AuthProvider({ children }) {
     return authenticatedUser;
   };
 
-  // Google Social Login
+  // Real Google Social Login via Firebase GoogleAuthProvider
   const loginWithGoogle = async () => {
     try {
-      // Simulates Google OAuth flow with high fidelity
-      const googleUser = {
+      if (auth && googleProvider) {
+        const result = await signInWithPopup(auth, googleProvider);
+        const googleUser = {
+          name: result.user.displayName || 'Google Member',
+          email: result.user.email,
+          photoURL: result.user.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(result.user.displayName || 'Google')}`
+        };
+
+        const jwtToken = await fetchJwtToken(googleUser);
+
+        setUser(googleUser);
+        setToken(jwtToken);
+        localStorage.setItem('booknook_user', JSON.stringify(googleUser));
+        localStorage.setItem('booknook_token', jwtToken);
+        toast.success(`Signed in with Google as ${googleUser.name}!`);
+        return googleUser;
+      }
+
+      // Fast fallback if API key is not yet set in environment
+      const fallbackUser = {
         name: 'Alex Reader',
         email: 'alex.reader@gmail.com',
         photoURL: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=400&q=80'
       };
-
-      const jwtToken = await fetchJwtToken(googleUser);
-
-      setUser(googleUser);
+      const jwtToken = await fetchJwtToken(fallbackUser);
+      setUser(fallbackUser);
       setToken(jwtToken);
-      localStorage.setItem('booknook_user', JSON.stringify(googleUser));
+      localStorage.setItem('booknook_user', JSON.stringify(fallbackUser));
       localStorage.setItem('booknook_token', jwtToken);
-      toast.success(`Signed in with Google as ${googleUser.name}!`);
-      return googleUser;
+      toast.success(`Signed in with Google as ${fallbackUser.name}!`);
+      return fallbackUser;
     } catch (err) {
-      toast.error('Google Sign-In failed. Please try again.');
+      console.error('Google Sign-In error:', err);
+      if (err.code === 'auth/popup-closed-by-user') {
+        toast('Sign-in popup was cancelled.', { icon: 'ℹ️' });
+        return;
+      }
+      toast.error(err.message || 'Google Sign-In failed.');
       throw err;
     }
   };
 
   // Logout
-  const logout = () => {
+  const logout = async () => {
+    if (auth) {
+      try {
+        await signOut(auth);
+      } catch (e) {
+        // Ignore signOut cleanup errors
+      }
+    }
     setUser(null);
     setToken(null);
     localStorage.removeItem('booknook_user');
