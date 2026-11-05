@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { BookOpen, User, Tag, Layers } from 'lucide-react';
 
 const categoryColorMap = {
@@ -17,7 +18,13 @@ export default function BookCard({ book }) {
   const categoryClass = categoryColorMap[book.category] || categoryColorMap.Others;
 
   return (
-    <div className="group flex flex-col h-full bg-white dark:bg-slate-800/90 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl hover:border-teal-500/50 transition-all duration-300">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      whileHover={{ y: -6, transition: { duration: 0.2 } }}
+      className="group flex flex-col h-full bg-white dark:bg-slate-800/90 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl hover:border-teal-500/50 transition-colors duration-300"
+    >
       {/* Book Cover Image Container */}
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-slate-100 dark:bg-slate-900">
         <img
@@ -86,6 +93,6 @@ export default function BookCard({ book }) {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

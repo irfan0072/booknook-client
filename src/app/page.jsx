@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
 import { 
@@ -252,9 +253,14 @@ export default function HomePage() {
             {workflowSteps.map((stepItem, idx) => {
               const Icon = stepItem.icon;
               return (
-                <div
+                <motion.div
                   key={idx}
-                  className="relative p-8 rounded-3xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 shadow-sm hover:shadow-md transition"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.15 }}
+                  whileHover={{ y: -6 }}
+                  className="relative p-8 rounded-3xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 shadow-sm hover:shadow-lg transition-colors"
                 >
                   <div className="flex items-center justify-between mb-6">
                     <div className="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center">
@@ -271,7 +277,7 @@ export default function HomePage() {
                   <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                     {stepItem.description}
                   </p>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -293,22 +299,30 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
-          {categories.map((cat) => (
-            <Link
+          {categories.map((cat, idx) => (
+            <motion.div
               key={cat.name}
-              href={cat.link}
-              className="group p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-teal-500 shadow-sm hover:shadow-lg transition-all text-center flex flex-col items-center justify-center"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: idx * 0.1 }}
+              whileHover={{ y: -6 }}
             >
-              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-tr ${cat.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition shadow-md`}>
-                <BookOpen className="w-7 h-7" />
-              </div>
-              <h3 className="font-bold text-base text-slate-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition">
-                {cat.name}
-              </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                {cat.count}
-              </p>
-            </Link>
+              <Link
+                href={cat.link}
+                className="group p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-teal-500 shadow-sm hover:shadow-lg transition-all text-center flex flex-col items-center justify-center h-full"
+              >
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-tr ${cat.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition shadow-md`}>
+                  <BookOpen className="w-7 h-7" />
+                </div>
+                <h3 className="font-bold text-base text-slate-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition">
+                  {cat.name}
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  {cat.count}
+                </p>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -329,8 +343,12 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {testimonials.map((t, index) => (
-                <div
+                <motion.div
                   key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.15 }}
                   className="p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 flex flex-col justify-between"
                 >
                   <Quote className="w-8 h-8 text-teal-300 mb-4 opacity-70" />
@@ -348,7 +366,7 @@ export default function HomePage() {
                       <p className="text-xs text-teal-200">{t.role}</p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
