@@ -124,7 +124,7 @@ export default function HomePage() {
   return (
     <div className="space-y-20 pb-20">
       {/* 1. Hero Banner Slider (Swiper.js with minimum 3 slides) */}
-      <section className="relative">
+      <section className="relative w-full overflow-hidden">
         <Swiper
           modules={[Autoplay, Pagination, Navigation]}
           spaceBetween={0}
@@ -133,42 +133,42 @@ export default function HomePage() {
           pagination={{ clickable: true }}
           navigation
           loop={true}
-          className="h-[520px] sm:h-[600px] w-full"
+          className="h-[480px] sm:h-[540px] lg:h-[580px] w-full"
         >
           {bannerSlides.map((slide) => (
             <SwiperSlide key={slide.id}>
-              <div className="relative w-full h-full flex items-center">
-                {/* Background Image with Dark Gradient Overlay */}
+              <div className="relative w-full h-full flex items-center justify-start text-left">
+                {/* Background Image with Enhanced Dark Gradient Overlay */}
                 <div 
                   className="absolute inset-0 bg-cover bg-center"
                   style={{ backgroundImage: `url(${slide.image})` }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-slate-950/40" />
                 </div>
 
-                {/* Slide Content */}
-                <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-                  <div className="max-w-2xl space-y-5">
-                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-teal-500/20 text-teal-300 border border-teal-400/30 backdrop-blur-md">
+                {/* Slide Content Aligned strictly with Navbar grid */}
+                <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
+                  <div className="max-w-2xl text-left space-y-4 sm:space-y-5">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-teal-500/20 text-teal-300 border border-teal-400/30 backdrop-blur-md">
                       <Sparkles className="w-3.5 h-3.5 text-teal-300" />
                       {slide.badge}
                     </span>
 
-                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+                    <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight text-left">
                       {slide.title}
                     </h1>
 
-                    <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal">
+                    <p className="text-sm sm:text-base lg:text-lg text-slate-200 leading-relaxed font-normal text-left max-w-xl">
                       {slide.subtitle}
                     </p>
 
-                    <div className="pt-2">
+                    <div className="pt-2 text-left flex justify-start">
                       <Link
                         href="/books"
-                        className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl text-base font-semibold text-white bg-teal-600 hover:bg-teal-500 active:scale-95 shadow-lg shadow-teal-600/40 transition-all duration-200"
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-sm sm:text-base font-semibold text-white bg-teal-600 hover:bg-teal-500 active:scale-95 shadow-lg shadow-teal-600/40 transition-all duration-200"
                       >
                         Browse Books
-                        <ArrowRight className="w-5 h-5" />
+                        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                       </Link>
                     </div>
                   </div>
@@ -181,17 +181,17 @@ export default function HomePage() {
 
       {/* 2. New Arrivals (Dynamic - latest 6 books from DB) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
           <div>
             <div className="flex items-center gap-2 text-teal-600 dark:text-teal-400 font-semibold text-xs tracking-wider uppercase mb-1">
               <Sparkles className="w-4 h-4" />
               <span>Fresh Off The Shelves</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               New Arrivals
             </h2>
           </div>
-          <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md">
             Check out the latest additions to our growing digital collection. Borrow instantly before copies run out.
           </p>
         </div>
@@ -215,7 +215,7 @@ export default function HomePage() {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {newArrivals.map((book) => (
               <BookCard key={book._id} book={book} />
             ))}

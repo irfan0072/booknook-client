@@ -107,7 +107,7 @@ export default function BookDetailsPage() {
       <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-12 gap-8 p-6 sm:p-10">
         {/* Cover Image */}
         <div className="md:col-span-5 flex flex-col items-center">
-          <div className="relative w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700">
+          <div className="relative w-full max-w-[260px] sm:max-w-sm aspect-[3/4] rounded-2xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-700">
             <img
               src={book.image}
               alt={book.title}
