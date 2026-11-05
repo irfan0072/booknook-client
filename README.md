@@ -5,8 +5,8 @@
 ### 🌐 Live Deployment
 - **Live Website URL**: [https://booknook-online-library.vercel.app](https://booknook-online-library.vercel.app)
 - **Server API URL**: [https://booknook-server-api.onrender.com](https://booknook-server-api.onrender.com)
-- **Client Repository**: [https://github.com/irfanurislam/booknook-client](https://github.com/irfanurislam/booknook-client)
-- **Server Repository**: [https://github.com/irfanurislam/booknook-server](https://github.com/irfanurislam/booknook-server)
+- **Client Repository**: [https://github.com/irfan0072/booknook-client](https://github.com/irfan0072/booknook-client)
+- **Server Repository**: [https://github.com/irfan0072/booknook-server](https://github.com/irfan0072/booknook-server)
 
 ---
 
@@ -49,7 +49,7 @@ NEXT_PUBLIC_API_URL=http://localhost:5000
 
 ```bash
 # Clone the repository
-git clone https://github.com/irfanurislam/booknook-client.git
+git clone https://github.com/irfan0072/booknook-client.git
 
 # Navigate to client directory
 cd booknook-client # or client
